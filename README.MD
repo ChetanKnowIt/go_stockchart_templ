@@ -12,7 +12,7 @@ Made a pretend stock market that randomly changes prices in a realistic way (up/
 4. Chart Display 📈
 Used a free charting tool (Chart.js) to draw a line that wiggles with each new price. Added titles and styling to make it look professional.
 
-## Flowchart
+## Flowchart:
 
 ```mermaid
 graph LR
@@ -27,11 +27,15 @@ JSON --Chart.js--> ChartUpdates
 ```go 
 templ generate && go run main.go
 ```
-## Chart Visualization
+## Chart Visualization:
 
-![Chart Demo](demo\demo.gif)
+![Chart Demo](https://github.com/ChetanKnowIt/go_stockchart_templ/tree/main/demo/demo.gif)
 
-## Links to resources
+## Tools used: 
+1. MS Vscode (1.98.2) --> [link](https://code.visualstudio.com/download)
+2. Go Lang (1.24.1) --> [link](https://go.dev/doc/install)
+
+## Links to resources:
 
 1. Creating a simple template component in Go --> [link](https://templ.guide/quick-start/creating-a-simple-templ-component)
 2. Static Rendering with templ --> [link](https://templ.guide/static-rendering/blog-example)
