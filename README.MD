@@ -29,7 +29,7 @@ templ generate && go run main.go
 ```
 ## Chart Visualization:
 
-![Chart Demo](https://github.com/ChetanKnowIt/go_stockchart_templ/tree/main/demo/demo.gif)
+![Chart Demo](https://github.com/ChetanKnowIt/go_stockchart_templ/blob/main/demo/demo.gif)
 
 ## Tools used: 
 1. MS Vscode (1.98.2) --> [link](https://code.visualstudio.com/download)
