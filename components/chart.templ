@@ -1,0 +1,94 @@
+package components
+
+// the templ is used to store the component required for the chart
+// it is used in the main.go file to render the chart
+// it is used to render the chart in the browser using the Chart.js library
+
+templ Chart() {
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Real-Time Stock Chart</title>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script
+         src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+      <style>
+         .chart-container {
+         width: 1000px;
+         margin: 2rem auto;
+         padding: 20px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         }
+         h1 {
+         text-align: center;
+         color: #2c3e50;
+         font-family: Arial, sans-serif;
+         }
+      </style>
+   </head>
+   <body>
+      <div class="chart-container">
+         <h1>Real-Time Stock: GOOG (Mock Data)</h1>
+         <canvas id="chart"></canvas>
+      </div>
+      <script>
+         const ctx = document.getElementById('chart').getContext('2d');
+         const chart = new Chart(ctx, {
+           type: 'line',
+           data: {
+             datasets: [{
+               label: 'Google (GOOG) Price',
+               borderColor: '#3498db',
+               backgroundColor: 'rgba(52, 152, 219, 0.1)',
+               borderWidth: 2,
+               pointRadius: 2,
+               tension: 0.1
+             }]
+           },
+           options: {
+             plugins: {
+               title: {
+                 display: true,
+                 text: 'Live Price Updates',
+                 font: { size: 16 }
+               },
+               legend: {
+                 position: 'top',
+                 labels: { font: { size: 14 } }
+               }
+             },
+             scales: {
+               x: {
+                 type: 'time',
+                 time: { unit: 'second', tooltipFormat: 'HH:mm:ss' },
+                 title: { display: true, text: 'Time', font: { size: 14 } }
+               },
+               y: {
+                 title: {
+                   display: true,
+                   text: 'Price (USD)',
+                   font: { size: 14 }
+                 },
+                 grid: { color: 'rgba(0,0,0,0.05)' }
+               }
+             }
+           }
+         });
+         
+         const ws = new WebSocket('ws://' + window.location.host + '/ws');
+         ws.onmessage = (event) => {
+           const data = JSON.parse(event.data);
+           chart.data.datasets[0].data.push({
+             x: data.time,
+             y: data.price
+           });
+           // Keep last 100 data points
+           if (chart.data.datasets[0].data.length > 100) {
+             chart.data.datasets[0].data.shift();
+           }
+           chart.update();
+         };
+      </script>
+   </body>
+</html>
+}
