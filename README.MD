@@ -27,6 +27,9 @@ JSON --Chart.js--> ChartUpdates
 ```go 
 templ generate && go run main.go
 ```
+## Chart Visualization
+
+![Chart Demo](demo\demo.gif)
 
 ## Links to resources
 
